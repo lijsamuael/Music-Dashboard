@@ -89,7 +89,7 @@ const SongsPage: React.FC = () => {
   }
 
   if (error) {
-    return <ErrorDisplay message={error} />;
+    return <ErrorDisplay />;
   }
 
   return (

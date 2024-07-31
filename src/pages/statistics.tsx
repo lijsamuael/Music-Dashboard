@@ -65,7 +65,7 @@ export default function StatisticsPage() {
   }
 
   if (error) {
-    return <ErrorDisplay message={error} />;
+    return <ErrorDisplay />;
   }
 
   return (
