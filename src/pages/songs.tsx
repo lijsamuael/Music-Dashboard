@@ -1,6 +1,5 @@
 // src/pages/SongsPage.tsx
 import React, { useEffect, useState } from "react";
-import styled from "@emotion/styled";
 import SongTable from "../components/songTable";
 import AddSongForm from "../components/addSongForm";
 import EditSongForm from "../components/editSongForm";
