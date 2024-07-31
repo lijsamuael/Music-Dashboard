@@ -1,6 +1,8 @@
 // src/components/EditSongForm.tsx
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
+import { StyledSelect } from "../styles/songs";
+import { genres } from "../constants";
 
 const Form = styled.form`
   display: flex;
@@ -131,12 +133,20 @@ const EditSongForm: React.FC<EditSongFormProps> = ({
             value={album}
             onChange={(e) => setAlbum(e.target.value)}
           />
-          <Input
-            type="text"
-            placeholder="Genre"
+          <StyledSelect
             value={genre}
             onChange={(e) => setGenre(e.target.value)}
-          />
+            required
+          >
+            <option value="" disabled>
+              Select Genre
+            </option>
+            {genres.map((genre) => (
+              <option key={genre} value={genre}>
+                {genre}
+              </option>
+            ))}
+          </StyledSelect>
           <Action>
             <Button type="submit">Update Song</Button>
             <CloseButton onClick={onClose}>Close</CloseButton>
