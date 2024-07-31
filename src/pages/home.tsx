@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { theme } from "../styles/theme";
 import { ButtonPrimary, ButtonSecondary } from "../components/button";
+import { Link } from "react-router-dom";
 
 const AppTitleText = styled.div`
   font-size: 2.5rem;
@@ -53,6 +54,10 @@ const Paragraph = styled.p`
   padding-top: 10px;
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
+
 const HomePage = () => {
   return (
     <CoverContent>
@@ -68,8 +73,12 @@ const HomePage = () => {
           the basic statisticall info.
         </Paragraph>
         <ButtonsContainer>
-          <ButtonPrimary>ADD SONG</ButtonPrimary>
-          <ButtonSecondary>STATISTICS</ButtonSecondary>
+          <StyledLink to="/songs">
+            <ButtonPrimary>ADD SONG</ButtonPrimary>
+          </StyledLink>
+          <StyledLink to="/statistics">
+            <ButtonSecondary>STATISTICS</ButtonSecondary>
+          </StyledLink>
         </ButtonsContainer>
       </AppCoverContainerText>
       <img width={500} src="/images/image.png" />

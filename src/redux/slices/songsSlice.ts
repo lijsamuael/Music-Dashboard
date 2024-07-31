@@ -35,7 +35,7 @@ const songsSlice = createSlice({
   reducers: {
     fetchSongsRequest: (
       _state,
-      _action: PayloadAction<{ searchInput: string; selectedFilter: string }>
+      _action: PayloadAction<{ selectedFilter: string }>
     ) => {},
     fetchSongs: (state, action: PayloadAction<Song[]>) => {
       state.songs = action.payload;

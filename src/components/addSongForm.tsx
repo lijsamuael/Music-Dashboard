@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { useDispatch } from "react-redux";
 import { addSongRequest } from "../redux/slices/songsSlice";
+import { genres } from "../constants";
 
 const Form = styled.form`
   display: flex;
@@ -72,6 +73,24 @@ const Action = styled.div`
   justify-content: space-between;
 `;
 
+const StyledSelect = styled.select`
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: #000;
+  appearance: none;
+  cursor: pointer;
+
+  &:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+`;
+
 interface Song {
   _id: string;
   title: string;
@@ -97,6 +116,8 @@ const AddSongForm: React.FC<AddSongFormProps> = ({
   const [genre, setGenre] = useState("");
 
   const dispatch = useDispatch();
+
+
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -143,13 +164,20 @@ const AddSongForm: React.FC<AddSongFormProps> = ({
             onChange={(e) => setAlbum(e.target.value)}
             required
           />
-          <Input
-            type="text"
-            placeholder="Genre"
+          <StyledSelect
             value={genre}
             onChange={(e) => setGenre(e.target.value)}
             required
-          />
+          >
+            <option value="" disabled>
+              Select Genre
+            </option>
+            {genres.map((genre) => (
+              <option key={genre} value={genre}>
+                {genre}
+              </option>
+            ))}
+          </StyledSelect>
           <Action>
             <Button type="submit">Add Song</Button>
             <CloseButton onClick={onClose}>Close</CloseButton>

@@ -25,32 +25,13 @@ const axiosInstance = axios.create({
 
 // Fetch songs
 function* getSongsList(
-  action: PayloadAction<{ searchInput: string; selectedFilter: string }>
+  action: PayloadAction<{ selectedFilter: string }>
 ): Generator<any, void, any> {
   try {
-    const { searchInput, selectedFilter } = action.payload;
-    var response;
-    if (selectedFilter == "artist") {
-      response = yield call(axiosInstance.get, "/songs", {
-        params: { artist: searchInput },
-      });
-    } else if (selectedFilter == "album") {
-      response = yield call(axiosInstance.get, "/songs", {
-        params: { album: searchInput },
-      });
-    } else if (selectedFilter == "genre") {
-      response = yield call(axiosInstance.get, "/songs", {
-        params: { genre: searchInput },
-      });
-    } else if (selectedFilter == "title") {
-      response = yield call(axiosInstance.get, "/songs", {
-        params: { artist: searchInput },
-      });
-    } else {
-      response = yield call(axiosInstance.get, "/songs", {
-        params: { artist: searchInput },
-      });
-    }
+    const { selectedFilter } = action.payload;
+    const response = yield call(axiosInstance.get, "/songs", {
+      params: { genre: selectedFilter },
+    });
 
     console.log("Fetched songs:", response.data.searchResult);
     yield put(fetchSongs(response.data.searchResult));

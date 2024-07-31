@@ -16,12 +16,12 @@ import {
   Container,
   FilterContainer,
   Header,
-  SearchInput,
   StyledOption,
   StyledSelect,
 } from "../styles/songs";
 import { LoadingIndicator } from "../components/LoadingComponent";
 import { ErrorDisplay } from "../components/errorDisplay";
+import { genres } from "../constants";
 
 const SongsPage: React.FC = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -36,7 +36,6 @@ const SongsPage: React.FC = () => {
 
   const [showFilter, setShowFilter] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState("");
-  const [searchInput, setSearchInput] = useState("");
 
   const dispatch: AppDispatch = useDispatch();
   const songs = useSelector((state: any) => state.songs.songs);
@@ -44,7 +43,7 @@ const SongsPage: React.FC = () => {
   const error = useSelector((state: any) => state.songs.error);
 
   useEffect(() => {
-    dispatch(fetchSongsRequest({ searchInput, selectedFilter }));
+    dispatch(fetchSongsRequest({ selectedFilter }));
   }, [dispatch]);
 
   const handleEditSong = (updatedSong: Song) => {
@@ -55,11 +54,6 @@ const SongsPage: React.FC = () => {
   const handleSelectedFilter = (e: any) => {
     const value = e.target.value;
     setSelectedFilter(value);
-  };
-
-  const handleSearchInput = (e: any) => {
-    const value = e.target.value;
-    setSearchInput(value);
   };
 
   const handleShowFilter = () => {
@@ -85,17 +79,10 @@ const SongsPage: React.FC = () => {
     setModalIsOpen(false);
   };
 
-  const options = [
-    { value: "", label: "Select Filter Method" },
-    { value: "title", label: "Title" },
-    { value: "artist", label: "Artist" },
-    { value: "album", label: "Album" },
-    { value: "genre", label: "Genre" },
-  ];
-
   useEffect(() => {
-    dispatch(fetchSongsRequest({ searchInput, selectedFilter }));
-  }, [searchInput]);
+    dispatch(fetchSongsRequest({ selectedFilter }));
+    console.log("selected filter", selectedFilter);
+  }, [selectedFilter]);
 
   if (loading) {
     return <LoadingIndicator />;
@@ -110,7 +97,7 @@ const SongsPage: React.FC = () => {
       <Header>
         <FilterContainer>
           <AddSongButton onClick={handleShowFilter}>
-            Filter{" "}
+            Filter by genre{" "}
             <img
               width={25}
               src={
@@ -128,18 +115,12 @@ const SongsPage: React.FC = () => {
                 onChange={handleSelectedFilter}
                 value={selectedFilter}
               >
-                {options.map((option) => (
-                  <StyledOption key={option.value} value={option.value}>
-                    {option.label}
+                {genres.map((genre) => (
+                  <StyledOption key={genre} value={genre}>
+                    {genre}
                   </StyledOption>
                 ))}
               </StyledSelect>
-              {selectedFilter && (
-                <SearchInput
-                  onChange={handleSearchInput}
-                  placeholder={`Filter by ${selectedFilter}`}
-                />
-              )}
             </>
           )}
         </FilterContainer>
