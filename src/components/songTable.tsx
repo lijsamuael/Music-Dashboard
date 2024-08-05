@@ -1,54 +1,29 @@
 // src/components/SongTable.tsx
 import React from "react";
 import styled from "@emotion/styled";
-import { TableCell, TableHeader } from "../styles/table";
-
-const TableContainer = styled.div`
-  width: 100%;
-  overflow-x: auto;
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-`;
-
-const Button = styled.button<{ color: string }>`
-  background: ${({ color }) => color};
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 8px 12px;
-  cursor: pointer;
-  font-size: 0.9rem;
-
-  &:hover {
-    background: ${({ theme }) => theme.colors.secondary};
-  }
-`;
-
-interface Song {
-  _id: string;
-  title: string;
-  artist: string;
-  album: string;
-  genre: string;
-}
+import {
+  Button,
+  ButtonContainer,
+  Table,
+  TableCell,
+  TableContainer,
+  TableHeader,
+} from "../styles/table";
+import { Song } from "../interfaces/songs";
 
 interface SongTableProps {
   songs: Song[];
   onEdit: (song: Song) => void;
   onDelete: (index: string) => void;
+  loading: boolean;
 }
 
-const SongTable: React.FC<SongTableProps> = ({ songs, onEdit, onDelete }) => {
+const SongTable: React.FC<SongTableProps> = ({
+  songs,
+  onEdit,
+  onDelete,
+  loading,
+}) => {
   return (
     <TableContainer>
       <Table>
@@ -74,7 +49,7 @@ const SongTable: React.FC<SongTableProps> = ({ songs, onEdit, onDelete }) => {
                     Edit
                   </Button>
                   <Button color={"red"} onClick={() => onDelete(song._id)}>
-                    Delete
+                    {loading ? "Deleting" : "Delete"}
                   </Button>
                 </ButtonContainer>
               </TableCell>

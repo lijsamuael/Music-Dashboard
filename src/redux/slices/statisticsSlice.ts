@@ -1,24 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-export interface AlbumByArtist {
-  _id: string;
-  albumsCount: number;
-}
-
-export interface SongByArtist {
-  _id: string;
-  songsCount: number;
-}
-
-export interface SongByAlbum {
-  _id: string;
-  songsCount: number;
-}
-
-export interface SongByGenre {
-  _id: string;
-  songsCount: number;
-}
+import {
+  AlbumByArtist,
+  SongByAlbum,
+  SongByArtist,
+  SongByGenre,
+} from "../../interfaces/statistics";
 
 export interface StatisticsState {
   songsPerArtist: SongByArtist[];
@@ -50,9 +36,7 @@ const statisticsSlice = createSlice({
   name: "statistics",
   initialState,
   reducers: {
-    fetchAlbumsByArtist: (_state) => {
-      console.log("endet nachu");
-    },
+    fetchAlbumsByArtist: (_state) => {},
     setAlbumsByArtist: (state, action: PayloadAction<AlbumByArtist[]>) => {
       state.albumsPerArtist = action.payload;
     },

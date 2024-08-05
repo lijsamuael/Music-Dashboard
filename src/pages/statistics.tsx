@@ -20,6 +20,7 @@ import {
 } from "../styles/statistics";
 import { LoadingIndicator } from "../components/LoadingComponent";
 import { ErrorDisplay } from "../components/errorDisplay";
+import { useAppSelector } from "../hooks";
 
 export default function StatisticsPage() {
   const dispatch: AppDispatch = useDispatch();
@@ -37,14 +38,14 @@ export default function StatisticsPage() {
     (state: RootState) => state.statistics.songsPerAlbum
   );
 
-  const totalSongs = useSelector((state: any) => state.statistics.totalSongs);
+  const totalSongs = useAppSelector((state) => state.statistics.totalSongs);
   const totalArtists = useSelector(
     (state: any) => state.statistics.totalArtists
   );
-  const totalGenres = useSelector((state: any) => state.statistics.totalGenres);
-  const totalAlbums = useSelector((state: any) => state.statistics.totalAlbums);
-  const loading = useSelector((state: any) => state.statistics.loading);
-  const error = useSelector((state: any) => state.statistics.error);
+  const totalGenres = useAppSelector((state) => state.statistics.totalGenres);
+  const totalAlbums = useAppSelector((state) => state.statistics.totalAlbums);
+  const loading = useAppSelector((state) => state.statistics.loading);
+  const error = useAppSelector((state) => state.statistics.error);
 
   useEffect(() => {
     dispatch(fetchTotalSongsRequest());

@@ -1,12 +1,12 @@
-// src/pages/SongsPage.tsx
 import React, { useEffect, useState } from "react";
 import SongTable from "../components/songTable";
 import AddSongForm from "../components/addSongForm";
 import EditSongForm from "../components/editSongForm";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { AppDispatch } from "../redux/store";
+import { useAppSelector, useAppDispatch } from "../hooks";
+
 import {
-  Song,
   deleteSongRequest,
   fetchSongsRequest,
   updateSongRequest,
@@ -19,9 +19,9 @@ import {
   StyledOption,
   StyledSelect,
 } from "../styles/songs";
-import { LoadingIndicator } from "../components/LoadingComponent";
 import { ErrorDisplay } from "../components/errorDisplay";
 import { genres } from "../constants";
+import { Song } from "../interfaces/songs";
 
 const SongsPage: React.FC = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -37,10 +37,10 @@ const SongsPage: React.FC = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState("");
 
-  const dispatch: AppDispatch = useDispatch();
-  const songs = useSelector((state: any) => state.songs.songs);
-  const loading = useSelector((state: any) => state.songs.loading);
-  const error = useSelector((state: any) => state.songs.error);
+  const dispatch = useAppDispatch();
+  const songs = useAppSelector((state) => state.songs.songs);
+  const loading = useAppSelector((state) => state.songs.loading);
+  const error = useAppSelector((state) => state.songs.error);
 
   useEffect(() => {
     dispatch(fetchSongsRequest({ selectedFilter }));
@@ -84,10 +84,6 @@ const SongsPage: React.FC = () => {
     console.log("selected filter", selectedFilter);
   }, [selectedFilter]);
 
-  if (loading) {
-    return <LoadingIndicator />;
-  }
-
   if (error) {
     return <ErrorDisplay />;
   }
@@ -129,7 +125,12 @@ const SongsPage: React.FC = () => {
         </AddSongButton>
       </Header>
 
-      <SongTable songs={songs} onEdit={handleEdit} onDelete={handleDelete} />
+      <SongTable
+        loading={loading}
+        songs={songs}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+      />
 
       <AddSongForm
         isOpen={modalIsOpen}

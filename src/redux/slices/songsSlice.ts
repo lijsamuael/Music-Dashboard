@@ -1,15 +1,10 @@
 // src/slices/songsSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Song } from "../../interfaces/songs";
 
-export interface Song {
-  _id: string;
-  title: string;
-  artist: string;
-  album: string;
-  genre: string;
-}
 
-interface SongsState {
+
+export interface SongsState {
   songs: Song[];
   totalSongs: number;
   totalArtists: number;

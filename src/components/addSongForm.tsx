@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import { useDispatch } from "react-redux";
 import { addSongRequest } from "../redux/slices/songsSlice";
 import { genres } from "../constants";
+import { useAppDispatch } from "../hooks";
 
 const Form = styled.form`
   display: flex;
@@ -116,7 +117,7 @@ const AddSongForm: React.FC<AddSongFormProps> = ({
   const [album, setAlbum] = useState("");
   const [genre, setGenre] = useState("");
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

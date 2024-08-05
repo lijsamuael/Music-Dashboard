@@ -3,7 +3,6 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import axios from "axios";
 import { PayloadAction } from "@reduxjs/toolkit";
 import {
-  Song,
   fetchSongsRequest,
   fetchSongs,
   addSongRequest,
@@ -13,7 +12,9 @@ import {
   deleteSongRequest,
   deleteSong,
   setError,
+  setLoading,
 } from "../slices/songsSlice";
+import { Song } from "../../interfaces/songs";
 
 const API_URL = import.meta.env.VITE_APP_API_URL;
 axios.defaults.withCredentials = true;
@@ -73,8 +74,10 @@ function* handleDeleteSong(
   action: PayloadAction<string>
 ): Generator<any, void, any> {
   try {
+    yield put(setLoading(true));
     yield call(axiosInstance.delete, `/songs/${action.payload}`);
     yield put(deleteSong(action.payload));
+    yield put(setLoading(false));
   } catch (error: any) {
     yield put(setError(true));
 
