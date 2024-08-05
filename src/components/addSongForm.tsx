@@ -74,13 +74,14 @@ const Action = styled.div`
 `;
 
 const StyledSelect = styled.select`
+  background-color: white;
   width: 100%;
   padding: 10px;
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
-  background-color: #000;
+  /* background-color: #000; */
   appearance: none;
   cursor: pointer;
 
@@ -116,8 +117,6 @@ const AddSongForm: React.FC<AddSongFormProps> = ({
   const [genre, setGenre] = useState("");
 
   const dispatch = useDispatch();
-
-
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

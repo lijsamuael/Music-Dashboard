@@ -35,6 +35,7 @@ export const StyledSelect = styled.select`
   box-sizing: border-box;
   border-radius: 4px;
   font-size: 16px;
+  color: white;
   background-color: #3e344d;
   &:focus {
     outline: none;
@@ -49,6 +50,7 @@ export const FilterContainer = styled.div`
 `;
 
 export const StyledOption = styled.option`
+  color: white;
   padding: 10px;
   font-size: 16px;
 `;
