@@ -9,13 +9,9 @@ import {
   fetchTotalArtistsRequest,
   fetchTotalGenresRequest,
   fetchTotalAlbumsRequest,
-  AlbumByArtist,
   setAlbumsByArtist,
-  SongByArtist,
   setSongsByArtist,
-  SongByGenre,
   setSongsByGenre,
-  SongByAlbum,
   setSongsByAlbum,
   fetchSongsByGenre,
   fetchSongsByArtist,
@@ -24,6 +20,12 @@ import {
   setLoading,
   setError,
 } from "../slices/statisticsSlice";
+import {
+  AlbumByArtist,
+  SongByAlbum,
+  SongByArtist,
+  SongByGenre,
+} from "../../interfaces/statistics";
 
 export interface TotalSongs {
   totalSongs: number;
