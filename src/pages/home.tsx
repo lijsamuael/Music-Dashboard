@@ -69,8 +69,8 @@ const HomePage = () => {
         <AppTitleText>The Ease Access</AppTitleText>
         <Paragraph>
           This is a mini music app which enables you to add, update and delete
-          your lists of products. In addition to that it allows you to capture
-          the basic statisticall info.
+          your lists of musics. In addition to that it allows you to capture the
+          basic statisticall info.
         </Paragraph>
         <ButtonsContainer>
           <StyledLink to="/songs">
